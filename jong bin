@@ -1,0 +1,313 @@
+C ++ 언어를 배우기 전에 C 언어와 유사한 점이 많기에 C 언어의 복습과 C++ 언어의 기초적인 부분을 같이 공부하기!!
+
+1. 
+#include <stdio.h>
+void sub1();
+void sub2();
+int main()
+{
+	printf("함수 호출 전\n");
+	sub1();
+	sub2();
+	printf("함수 호출 후\n");
+}
+void sub1()
+{
+	printf("C programming\n");
+}
+void sub2()
+{
+	printf("C++ programming\n");
+}
+
+2. 전광판 함수라고 일컫는 소스로 main()함수에서 display();함수만으로도 "안녕하세요"를 출력할 수 있습니다.!!
+#include <iostream>
+void display();
+int main()
+{
+	display();
+	return 0;
+}
+void display()
+{
+	std::cout << "안녕하세요" << std::endl;
+}
+
+3.
+#include <iostream>
+void double_number(int x);
+int main()
+{
+	double_number(5);
+	return 0;
+}
+void double_number(int x)
+{
+	std::cout << "2배의 값은 = "<< x * 2 << std::endl;
+}
+
+4. 위에 소스의 변경한것입니다. x*2를 쓰는 대신 x<<1을 사용하여 비트를 이동시켜 2배 시켜준 것입니다. 
+★ 위 소스(3.)처럼 return 문이 없는 경우에는 void를 쓰지만 아래 소스(4.)처럼 return 문이 있는 경우에는 반드시 int형을 써야합니다!!
+#include <iostream>
+int double_number(int x);
+int main()
+{
+	int x;
+	x = double_number(8);
+	std::cout << "2배의 값은 = " << x << std::endl;
+	return 0;
+}
+int double_number(int x)
+{
+	return x << 1; 
+}
+
+5.
+#include <iostream>
+char vending(int x);
+int main()
+{
+	char x;
+	x = vending(1);
+	std::cout << x << std::endl;
+	return 0;
+}
+char vending(int x)
+{
+	if (x == 1) return 'A';
+	else return 'B';
+}
+
+6.
+#include <iostream>
+const char* vending(int x);
+int main()
+{
+	std::cout << vending(2) << std::endl;
+	return 0;
+}
+const char* vending(int x)
+{
+	if (x == 1) return "커피";
+	else if (x == 2) return "율무차";
+	else return "유자차";
+}
+
+7.
+#include <stdio.h>
+int sub(int x, int y);
+int main()
+{
+	int sum;
+	sum = sub(10, 5);
+	printf("sum=%d\n", sum);
+	return 0;
+}
+int sub(int x, int y)
+{
+	int z;
+	z = x - y;
+	return(z);
+}
+
+8. 재귀함수(recursive function) >> 사용자 정의 함수에서 만들어진 곳에서 n이 1이 될때까지 프로그램이 반복되는 소스입니다.
+#include<stdio.h>
+int sum(int n); 
+int main()
+{
+	int in = 5, out;
+	out = sum(in); 
+	printf("\n in = % d, out = % d\n", in, out);
+	return 0;
+}
+int sum(int n)
+{
+	printf("n=%d ", n);
+	if (n <= 1) return(1);
+	else return(n + sum(n - 1));
+}
+
+9. ※이 함수는 에러가 발생하는 이유는 사용자 정의 함수가 int형으로 만들었지만 ad와 bd의 변수의 값이 실수형이기에 Error가 발생합니다. 이 Error를 방지하기 위해서는 실수형(double)에 맞는 사용자 정의 함수를 만들어야 합니다. 
+#include <stdio.h>
+int sum(int a, int b);
+int main()
+{
+	int a = 3, b = 8, res;
+	double ad = 3.5, bd = 8.5;
+	res = sum(a, b); // "a의 값"과 "b의 값"이 들어가 계산
+	printf("%d\n", res); // 11
+	res = sum(ad, bd); // 함수가 int 형이기에 double형은 에러
+	printf("%f\n", res);
+	return 0;
+}
+int sum(int a, int b)
+{
+	return(a+b)
+}
+
+10. 
+#include <stdio.h>
+int add(int x, int y);
+int main()
+{
+	int a = 5, b = 8, c = 0;
+	printf("add함수 before => a=%d b=%d c=%d\n",a, b, c); // a=5 b=8 c=0
+	c = add(a, b);
+	printf("add함수 after =>  a=%d b=%d c=%d\n", a, b, c); // a=5 b=8 c=28
+	return 0;
+}
+int add(int x, int y)
+{
+	x += 5;
+	y += 10;
+	printf("add()함수 in => a+b=%d\n", x + y); // a+b=28
+	return (x + y);
+}
+
+11. 사용자 정의 함수에서 return 문이 있기에 반드시 int형 까먹지 않기  // 또한 return 문을 되돌려주면 값이 없어지기 때문에 반드시 변수를 만들어준 후 변수에다가 return해서 받은 값을 넣어야 합니다.
+#include <stdio.h>
+int add(int x, int y);
+int main()
+{
+	int num1 = 3, num2 = 4;
+	int num3 = 5, num4 = 6;
+	int sum1, sum2;
+	sum1 = add(num1, num4);
+	printf("%d와 %d를 더한 결과는 %d입니다.\n", num1, num4, sum1);
+	sum2 = add(num2, num3);
+	printf("%d와 %d를 더한 결과는 %d입니다.\n", num2, num3, sum2);
+	return 0;
+}
+int add(int x, int y)
+{
+	return x + y;
+}	
+
+12. // 합,최댓값,최솟값을 구해주는 프로그램으로서 max변수는 처음 입력되는 값을 INT_MIN(가장 작은 값)과 비교 후 처음 입력되는 값을 max에 대입 후 나머지 입력되는 값을 삼항연산자를 통해 비교되며
+min 변수도 max 변수와 같은 방법으로 INT_MAX(가장 큰 값)과 비교 후 삼항연산자를 통해 비교합니다. // ★sum의 값을 처음에 초기화를 시켜주지 않으면 에러가 나니 반드시 초기화 시켜줘야합니다!!
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <limits.h>
+int max_number(int x, int y);
+int min_number(int x, int y);
+int main()
+{
+	int i, total, num, sum = 0;
+	int max = INT_MIN, min = INT_MAX;
+	printf("계산하려는 수는 몇개입니까? ");
+	scanf("%d", &total);
+	for (i = 0; i < total; i++)
+	{
+		printf("%d번째 수를 입력하시오 = ", i + 1);
+		scanf("%d", &num);
+		sum += num;
+		max = max_number(num, max);
+		min = min_number(num, min);
+	}
+	printf("합:%d 최댓값:%d 최솟값:%d\n", sum, max, min);
+	return 0;
+}
+int max_number(int x, int y)
+{
+	return ((x > y) ? x : y);
+}
+int min_number(int x, int y)
+{
+	return ((x < y) ? x : y);
+}
+
+13. // 여러 지역 변수들을 사용하여 지역 변수의 특징(?)을 살펴본 소스입니다. 아래 보이는 거와 같이 지역 변수는 각 해당되는 {} 괄호 안에 쓰이지만 해당되는 {}에 벗어나면 반드시 소거됩니다.
+#include <stdio.h>
+int main()
+{
+	int i = 5; //지역 변수 1
+	printf("%d\n", i); // 5
+	{
+		int i = 10; // 지역 변수 2
+		i += 10;
+		printf("%d\n", i); // 20
+	} 
+	i += 5;
+	printf("%d\n", i); // 10
+	return 0;
+}
+
+14.
+#include <stdio.h>
+int add(int x, int y);
+int main()
+{
+	int x = 10, y = 15, sum;
+	printf("add함수 before x=%d, y=%d\n", x, y); //x=10, y=15
+	sum = add(x, y); // x와 y 변수의 값을 call by value
+	printf("sum=%d\n", sum);
+	printf("add함수 after x=%d, y=%d\n", x, y); // x=10, y=15
+	// 같은 중괄호의 연산이 없기에 before값과 동일
+	return 0;
+}
+int add(int x, int y)
+{
+	printf("add함수 in(1) x=%d, y=%d\n", x, y); // x=10, y=15
+	x += 10;
+	y += 20;
+	printf("add함수 in(2) x=%d, y=%d\n", x, y); // x=20, y=35
+	return (x + y);
+}
+
+15. // 흔히 사용하는 자료형에는 auto가 생략되어 있으며 위에(13.) 설명과 같이 지역변수는 각 {}안에 해당하며 벗어나면 소거됩니다.
+#include <stdio.h>
+int main()
+{
+	auto int a = 3;
+	{
+		int a = 5; // auto 생략 가능
+		{
+			int a = 7; // auto 생략 가능
+			printf("%d\n", a);//7
+		}
+		printf("%d\n", a);//5
+	}
+	printf("%d\n",a);//3
+	return 0;
+	// auto 변수는 각 블록안에서 기억 영역이 확보되며 벗어나면 소거됨
+}
+
+16. //static인 정적 변수와 지역 변수의 다른 점은 지역변수는 자기 구역의 블록까지만 해당되지만 static에 저장된 데이터는 프로그램 종료될때까지 초기화 됨 
+// => {} 벗어나도 지역변수는 항상 값이 동일하지만 정적변수는 {} 벗어나지만 변화되는 값들을 볼 수 있습니다.
+#include<iostream>
+void add();
+int main()
+{
+	int i ;
+	for (i = 0; i < 3; i++) {
+		add();
+		// x=5 y=5
+		// x=5 y=6
+		// x=5 y=7
+	}
+	return 0;
+}
+void add()
+{
+	int x = 5;
+	static int y = 5; 
+	std::cout << "x=" << x << "," << "y=" << y << std::endl;
+	x++;
+	y++;
+}
+
+17. C++에서 구조체 이용해보기 C와 다른 점은 C는 struct Man yun; 이라고 써야 하는것을 C++는 간단하게 Man yun;이라 쓸 수 있습니다.
+#include<iostream>
+struct Man {
+	int age;
+	double weight;
+};
+int main()
+{
+	Man yun;
+	yun.age = 20;
+	yun.weight = 64.7;
+	std::cout << "나의 나이는=" << yun.age << std::endl;
+	std::cout << "나의 몸무게는=" << yun.weight << std::endl;
+	return 0;
+}
